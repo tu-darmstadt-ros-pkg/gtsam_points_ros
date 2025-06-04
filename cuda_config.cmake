@@ -1,0 +1,7 @@
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "^(aarch64|arm64)")
+  message(WARNING "System processor: ${CMAKE_SYSTEM_PROCESSOR} only compiling for sm_87")
+  set(CMAKE_CUDA_ARCHITECTURES "87" CACHE STRING "")
+else()
+  set(CMAKE_CUDA_ARCHITECTURES "all-major" CACHE STRING "")
+  message(WARNING "compiling all-major")
+endif()

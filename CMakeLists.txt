@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.10)
 project(gtsam_points)
 
 # Default to C++17
@@ -13,6 +13,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 
 include(ExternalProject)
+#set(CMAKE_CUDA_ARCHITECTURES "70;80;86" CACHE STRING "CUDA architectures" FORCE)
 
 ExternalProject_Add(gtsam_points_src
   GIT_REPOSITORY https://github.com/koide3/gtsam_points.git
@@ -23,7 +24,9 @@ ExternalProject_Add(gtsam_points_src
     -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX} -DBUILD_SHARED_LIBS=ON
     -DCMAKE_VERBOSE_MAKEFILE=ON
     -DCMAKE_BUILD_TYPE:STRING=Release
+    #-DCMAKE_CUDA_ARCHITECTURES:STRING=60\;80
     #-DCMAKE_CXX_FLAGS=-fPIC
+    -DCMAKE_PROJECT_INCLUDE=${CMAKE_CURRENT_SOURCE_DIR}/cuda_config.cmake
     ../gtsam_points_src
   #BUILD_COMMAND make #-j8
   #INSTALL_COMMAND make install #-j8
