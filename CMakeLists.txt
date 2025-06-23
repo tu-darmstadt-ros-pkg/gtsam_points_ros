@@ -15,9 +15,11 @@ find_package(ament_cmake REQUIRED)
 include(ExternalProject)
 #set(CMAKE_CUDA_ARCHITECTURES "70;80;86" CACHE STRING "CUDA architectures" FORCE)
 
+set(VERSION "60918ef76ba21b21c9c50dc0ae62cddd5b626fb1") # fix to gtsam 4.2 as ros jazzy doesn't provide 4.3
+
 ExternalProject_Add(gtsam_points_src
   GIT_REPOSITORY https://github.com/koide3/gtsam_points.git
-  GIT_TAG master #${VERSION}
+  GIT_TAG ${VERSION}
   UPDATE_COMMAND ""
   CONFIGURE_COMMAND cmake
     -DBUILD_WITH_CUDA=ON
